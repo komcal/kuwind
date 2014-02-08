@@ -1,20 +1,22 @@
-var os = require("os");
+#!/usr/bin/env node
 
-var Kuwind = function(){};
+var kuwind = require("./kuwind");
+var kuwintools = require("./kuwintools");
 
-Kuwind.prototype.isInKu = function(){
-	var self = this;
-
-	var ifaces = os.networkInterfaces();
-	return Object.keys().some(function(iface){
-		return ifaces[iface].some(function(ip){
-			return self.isKuIp(ip.address);
-		});
+if(process.argv.length == 5){
+	kuwind.login({
+		username: process.argv[2],
+		password: process.argv[3],
+		zone: process.argv[4]
+	}, function(error, data){
+		if(error){
+			console.log("Cannot login: "+data.message);
+			process.exit(1);
+		}else{
+			console.log("Logged in as "+data.user);
+		}
 	});
-};
-
-Kuwind.prototype.isKuIp = function(ip){
-	return ip.indexOf("158.108.") === 0;
-};
-
-module.exports = new Kuwind();
+}else{
+	console.log("Usage: "+process.argv[1]+" user pass zone");
+	console.log("zone is one of "+kuwintools.zones.join(", "));
+}

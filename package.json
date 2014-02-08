@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Log you in to Kasetsart University WIreless Network",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "ku"
   ],
   "author": "Manatsawin Hanmongkolchai",
-  "license": "GPLv3"
+  "license": "GPLv3",
+  "dependencies": {
+    "request": "~2.33.0"
+  }
 }
